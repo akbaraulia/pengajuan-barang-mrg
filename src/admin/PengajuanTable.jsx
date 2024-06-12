@@ -35,7 +35,7 @@ const PengajuanTable = ({ pengajuans, user, handleShowEdit, handleShowDelete, ha
                 onChange={e => setFilter(e.target.value)} 
                 className="search-bar"
             />
-            <div className="table-container"> {/* Add this div to make the table responsive */}
+            <div className="table-container"> 
                 <table className="pengajuan-table">
                     <thead>
                         <tr>
@@ -45,7 +45,6 @@ const PengajuanTable = ({ pengajuans, user, handleShowEdit, handleShowDelete, ha
                             <th>Harga Satuan</th>
                             <th>Status</th>
                             <th>Alasan Ditolak</th>
-                            <th>Ditolak Oleh</th>
                             <th>Bukti Transfer</th>
                             <th>Harga Total</th>
                             <th>ID</th>
@@ -60,14 +59,18 @@ const PengajuanTable = ({ pengajuans, user, handleShowEdit, handleShowDelete, ha
                                 <td>{pengajuan.quantity}</td>
                                 <td>{formatRupiah(pengajuan.price)}</td>
                                 <td>{pengajuan.status}</td>
-                                <td>
-                                    {pengajuan.status === 'approved_finance' ? "Selamat, pengajuanmu sudah di approve oleh manager dan finance" :
-                                    pengajuan.rejection_reason ? pengajuan.rejection_reason : "Pengajuan masih di proses"}
-                                </td>
-                                <td>
-  {pengajuan.status === 'approved_finance' ? "Pengajuan berhasil di approve" :
-  pengajuan.rejected_by ? pengajuan.rejected_by : "Pengajuan masih di proses"}
+<td>
+    {pengajuan.status === 'approved_finance' ? "Selamat, pengajuanmu sudah di approve oleh manager dan finance" :
+    pengajuan.rejection_reason ? 
+        (function() {
+            try {
+                return JSON.parse(pengajuan.rejection_reason).reason;
+            } catch {
+                return pengajuan.rejection_reason;
+            }
+        })() : "Pengajuan masih di proses"}
 </td>
+                            
                                 <td>
                                     {pengajuan.status === 'pending' ? "Pengajuan masih di proses" : 
                                     pengajuan.status === 'rejected' ? "Pengajuan kamu di tolak" : 

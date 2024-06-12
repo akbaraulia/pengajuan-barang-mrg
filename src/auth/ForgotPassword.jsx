@@ -49,7 +49,7 @@ const ForgotPassword = () => {
       <form className="authForm" onSubmit={handleForgotPassword}> 
         <h2 className="text-center" style={{ color: HEADER_TEXT_COLOR, fontFamily: FONTS.heading }}>Forgot Password</h2>
         <p style={{ color: PARAGRAPH_TEXT_COLOR, textAlign: 'center' }}>
-  Enter your email address and we'll send you a link to reset your password.
+  Enter your email address and we'll send you a link to reset your password this process may take a long time do to free smtp gmail.
 </p>  
         {error && <div className="alert alert-danger" style={{ color: DANGER_TEXT_COLOR }}>{error}</div>}
         <div className="form-group">

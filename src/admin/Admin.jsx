@@ -153,11 +153,15 @@ const Admin = ({
         </Navbar.Collapse>
       </Navbar>
 
-      {user.role === 'officer' && (
+      {(user.role === 'officer') ? (
   <Button variant="primary" onClick={() => setShowCreateModal(true)}>
     Create Pengajuan
   </Button>
-)}
+) : ((user.role === 'finance' || user.role === 'manager') && (
+  <Button variant="primary" onClick={() => window.location.href='/history'}>
+    Lihat History
+  </Button>
+))}
 
       <PengajuanTable
         pengajuans={pengajuans}
@@ -202,7 +206,7 @@ const Admin = ({
         newPengajuan={newPengajuan} 
         setNewPengajuan={setNewPengajuan} 
         handleEditPengajuan={handleEditPengajuan} 
-      />
+      />    
     </div>
   );
 };

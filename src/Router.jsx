@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import 'animate.css';
 import Login from './auth/Login.jsx'; 
 import Register from './auth/Register.jsx'; 
@@ -8,6 +8,7 @@ import './styles/animation.css';
 import ResetPassword from './auth/ResetPassword.jsx';
 import Admin from './admin/Admin.jsx'; 
 import withAuthentication from './admin/WithAuthentication.jsx';
+import History from './admin/History'; 
 
 const AuthenticatedAdmin = withAuthentication(Admin); 
 
@@ -16,13 +17,16 @@ const AnimatedRoutes = () => {
 
   return (
     <Routes location={location}>
+      <Route path="/" element={<Navigate to="/login" />} /> 
       <Route path="/login" element={<div key={location.key} className="animate__animated animate__fadeInDown"><Login /></div>} /> 
       <Route path="/register" element={<div key={location.key} className="animate__animated animate__fadeInDown"><Register /></div>} />
       <Route path="/forgot" element={<div key={location.key} className="animate__animated animate__fadeInDown"><Forgot /></div>} />
       <Route path="/reset-password" element={<div key={location.key} className="animate__animated animate__fadeInDown"><ResetPassword /></div>} />
-      <Route path="/admin" element={<div key={location.key} className="animate__animated animate__fadeInDown"><AuthenticatedAdmin /></div>} /> {/* Use the AuthenticatedAdmin component */}
+      <Route path="/admin" element={<div key={location.key} className="animate__animated animate__fadeInDown"><AuthenticatedAdmin /></div>} /> 
+      <Route path="/history" element={<div key={location.key} className="animate__animated animate__fadeInDown"><History /></div>} />
 
-      {/* Add more routes as needed */}
+
+
     </Routes>
   );
 };
